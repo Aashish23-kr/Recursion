@@ -1,0 +1,13 @@
+class Solution {
+    public boolean checkSubsequenceSum(int[] nums, int k) {
+         return count(nums,0,0,k);
+    }
+    private boolean count(int[] nums,int index,int sum, int k){
+        if(index==nums.length){
+            return sum == k? true:false;
+        }
+        boolean take = count(nums,index+1,sum+nums[index],k);
+        boolean nottake = count(nums,index+1,sum,k);
+        return take || nottake;
+    }
+}
