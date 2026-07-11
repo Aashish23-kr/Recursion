@@ -1,0 +1,24 @@
+Time Complexity
+O(2ⁿ) (every element has two choices)
+Space Complexity
+O(n) (recursion stack)
+
+class Solution {
+    public int countSubsequenceWithTargetSum(int[] nums, int k) {
+        return count(nums, 0, 0, k);
+    }
+
+    private int count(int[] nums, int index, int sum, int k) {
+        if (index == nums.length) {
+            return sum == k ? 1 : 0;
+        }
+
+        // Include current element
+        int take = count(nums, index + 1, sum + nums[index], k);
+
+        // Exclude current element
+        int notTake = count(nums, index + 1, sum, k);
+
+        return take + notTake;
+    }
+}
