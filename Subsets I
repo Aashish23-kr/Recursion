@@ -1,0 +1,21 @@
+class Solution {
+    private void helper(int index,int currentSum, int[] nums, List<Integer> result ){
+        if(index==nums.length){
+            result.add(currentSum);
+            return;
+        }
+        helper(index+1, currentSum+nums[index], nums, result);
+        helper(index+1, currentSum, nums, result);
+    }
+    public List<Integer> subsetSums(int[] nums) {
+        //your code goes here
+        List<Integer> result = new ArrayList<>();
+        helper(0,0,nums,result);
+        Collections.sort(result);
+        return result;
+    }
+}
+
+Time Complexity: O(2^n),Each element has two choices: include or exclude, leading to 2n subsets. We directly compute sums without iterating over subsets, so complexity is O(2n). Sorting the sums adds O(2n log(2n)), making the total O(2n log(2n)).
+
+Space Complexity: O(2^n),The result array holds all subset sums, requiring O(2n) space. Recursion uses an additional O(n) stack space due to function calls, so total auxiliary space is O(2n + n).
